@@ -25,3 +25,8 @@ You are free to choose how you implement the solution though your choices should
 We will send you an invite to this git repository. Please **fork** this repository, where you can commit or upload your code. Once finished please create a **pull request** and we will review your code. We normally expect to hear back from you within five working days. 
 
 Best of luck, and we look forwards to your response!
+
+# Solution #
+Built in Python
+
+Parcels are configurred in yaml file for reliability
