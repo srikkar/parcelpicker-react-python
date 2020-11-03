@@ -18,3 +18,5 @@
 **/_ReSharper.Caches/*
 
 **/node_modules/*
+virtual_env
+__pycache__/*.pyc
