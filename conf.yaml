@@ -12,10 +12,14 @@ packages:
     -   'type': 'Small'
         'length': 200
         'breadth': 300
-        'height': 150
+        'height': 150   
         'cost': 5.00
 packageDimensionUnit: 'mm'
 packageCostUnit: '$'
 weightLimit:    
     'value': 25
     'unit': 'Kgs'
+
+ERROR_RESPONSES:
+    typeError: 'Unexpected Input Detected'
+    packageNotFound: 'Dimension(s) Exceeded limit'

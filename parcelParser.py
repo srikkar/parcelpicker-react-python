@@ -15,6 +15,7 @@ class ParcelParser:
                 self.thresholdWeight = self.configuration.get('weightLimit')
                 self.packageCostUnit = self.configuration.get('packageCostUnit')
                 self.packageDimensionUnit = self.configuration.get('packageDimensionUnit')
+                self.errors = self.configuration.get('ERROR_RESPONSES')
         except FileNotFoundError:
             print(CONFIGURATION_FILE+ "is missing .....!")
         except Exception as error:
@@ -35,7 +36,7 @@ class ParcelParser:
                 print('weight validation completed!')
                 return True
         except TypeError:
-            raise TypeError('Numeric Input expected!')   
+            raise TypeError(self.errors['typeError']) 
         except Exception as error:
             print(error)    
             
@@ -53,18 +54,20 @@ class ParcelParser:
                 print('Non-Standard input detected!')
                 raise TypeError('Non-Standard Input package detected...!')
 
-            response = dict.fromkeys(['packageType','cost'])
+            outputObject = dict.fromkeys(['packageType','cost'])
             for package in sorted(self.configuration.get('packages',[]), key = lambda i: i['length']):
                 dimensionCounter = 0; dimensionsList = list(packageDimensions.keys())
                 for key in dimensionsList:
                     if package[key] >= packageDimensions[key]:
                         dimensionCounter+=1
                         if dimensionCounter == len(dimensionsList):
-                            response['packageType']= package.get('type')
-                            response['cost']= package.get('cost')
-                            return response
-            return response
+                            outputObject['packageType']= package.get('type')
+                            outputObject['cost']= package.get('cost')
+                            return outputObject
+            
+            outputObject['exception'] = self.errors['packageNotFound']
+            return outputObject
         except TypeError:
-            raise TypeError('Numeric Input expected!')   
+            raise TypeError(self.errors['typeError'])   
         except Exception as error:
             print(error)   

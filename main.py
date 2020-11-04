@@ -1,14 +1,26 @@
 from parcelParser import ParcelParser
 
-print ("++++++++++   Welcome to Parcel Expense Calculator   +++++++++++++")
-userInput = {}
-inputWeight = float(input ('Enter Package Weight (In Kgs): '))
+print ("++++++++++   Welcome to Parcel packaging Solution   +++++++++++++")
+def startApp():
+    try:
 
-ppObj = ParcelParser()
-if ppObj.checkWeight(inputWeight):
-    
-    userInput['length'] = float(input ('Enter Package length (In mm): '))
-    userInput['breadth'] = float(input ('Enter Package breadth (In mm): '))
-    userInput['height'] = float(input ('Enter Package height (In mm): '))
+        ppObj = ParcelParser()
+        inputWeight = float(input ('Enter Package Weight (In '+ppObj.thresholdWeight.get('unit', 'Kgs')+'): '))
+        if ppObj.checkWeight(inputWeight):
+        
+            userInput = {}
+            print('Please enter Package Dimensions in (In '+ppObj.configuration.get('packageDimensionsUnit','mm')+')')
+            userInput['length'] = float(input ('Enter Package length: '))
+            userInput['breadth'] = float(input ('Enter Package breadth: '))
+            userInput['height'] = float(input ('Enter Package height: '))
+            packageSolution = ppObj.checkDimensions(userInput)
+            print('Package Type: '+packageSolution.get('packageType'))
+            print('Package Cost: '+ str(ppObj.packageCostUnit)+''+str(packageSolution.get('cost')))
+    except Exception:
+        print('Unexpected Input detected....!')
+        print('Restarting App...')
+        startApp()
 
-    print(ppObj.checkDimensions(userInput))
+if __name__ == "__main__":
+    startApp()
+
