@@ -1,18 +1,21 @@
 packages:
-    # All the dimensions below are in (mm)
-    -   Small:
-            'length': 200
-            'breadth': 300
-            'height': 150
-            'cost': '$5.00'
-    -   Medium:
-            'length': 300
-            'breadth': 400
-            'height': 200
-            'cost': '$7.50'
-    -   Large:
-            'length': 400
-            'breadth': 600
-            'height': 250
-            'cost': '$8.50'
-thresholdWeight: 25 # weight is in (kgs)
+    -   'type': Medium
+        'length': 300
+        'breadth': 400
+        'height': 200
+        'cost': 7.50
+    -   'type': 'Large'
+        'length': 400
+        'breadth': 600
+        'height': 250
+        'cost': 8.50
+    -   'type': 'Small'
+        'length': 200
+        'breadth': 300
+        'height': 150
+        'cost': 5.00
+packageDimensionUnit: 'mm'
+packageCostUnit: '$'
+weightLimit:    
+    'value': 25
+    'unit': 'Kgs'
