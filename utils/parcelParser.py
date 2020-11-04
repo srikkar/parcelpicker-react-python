@@ -9,12 +9,14 @@ class ParcelParser:
         """ Loads Configuration file when Object is initialized
         """
         try:
+            ENV = os.getenv('ENV', 'DEV')
             with open(configurationFilePath, 'r') as configFile:
                 self.configuration = yaml.safe_load(configFile)
-                self.thresholdWeight = self.configuration.get('weightLimit')
-                self.packageCostUnit = self.configuration.get('packageCostUnit')
-                self.packageDimensionUnit = self.configuration.get('packageDimensionUnit')
-                self.errors = self.configuration.get('ERROR_RESPONSES')
+                self.envConfig = self.configuration[ENV]
+                self.thresholdWeight = self.envConfig.get('weightLimit')
+                self.packageCostUnit = self.envConfig.get('packageCostUnit')
+                self.packageDimensionUnit = self.envConfig.get('packageDimensionUnit')
+                self.errors = self.envConfig.get('ERROR_RESPONSES')
         except FileNotFoundError:
             print(CONFIGURATION_FILE+ "is missing .....!")
         except Exception as error:
@@ -54,7 +56,7 @@ class ParcelParser:
                 raise TypeError('Non-Standard Input package detected...!')
 
             outputObject = dict.fromkeys(['packageType','cost'])
-            for package in sorted(self.configuration.get('packages',[]), key = lambda i: i['length']):
+            for package in sorted(self.envConfig.get('packages',[]), key = lambda i: i['length']):
                 dimensionCounter = 0; dimensionsList = list(packageDimensions.keys())
                 for key in dimensionsList:
                     if package[key] >= packageDimensions[key]:

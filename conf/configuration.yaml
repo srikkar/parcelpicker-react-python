@@ -1,25 +1,77 @@
-packages:
-    -   'type': Medium
-        'length': 300
-        'breadth': 400
-        'height': 200
-        'cost': 7.50
-    -   'type': 'Large'
-        'length': 400
-        'breadth': 600
-        'height': 250
-        'cost': 8.50
-    -   'type': 'Small'
-        'length': 200
-        'breadth': 300
-        'height': 150   
-        'cost': 5.00
-packageDimensionUnit: 'mm'
-packageCostUnit: '$'
-weightLimit:    
-    'value': 25
-    'unit': 'Kgs'
+DEV:
+    packages:
+        -   'type': Medium
+            'length': 300
+            'breadth': 400
+            'height': 200
+            'cost': 7.50
+        -   'type': 'Large'
+            'length': 400
+            'breadth': 600
+            'height': 250
+            'cost': 8.50
+        -   'type': 'Small'
+            'length': 200
+            'breadth': 300
+            'height': 150   
+            'cost': 5.00
+    packageDimensionUnit: 'mm'
+    packageCostUnit: '$'
+    weightLimit:    
+        'value': 25
+        'unit': 'Kgs'
+    ERROR_RESPONSES:
+        typeError: 'Unexpected Input Detected'
+        packageNotFound: 'Dimension(s) Exceeded limit'
 
-ERROR_RESPONSES:
-    typeError: 'Unexpected Input Detected'
-    packageNotFound: 'Dimension(s) Exceeded limit'
+STG:
+    packages:
+        -   'type': Medium
+            'length': 300
+            'breadth': 400
+            'height': 200
+            'cost': 7.50
+        -   'type': 'Large'
+            'length': 400
+            'breadth': 600
+            'height': 250
+            'cost': 8.50
+        -   'type': 'Small'
+            'length': 200
+            'breadth': 300
+            'height': 150   
+            'cost': 5.00
+    packageDimensionUnit: 'mm'
+    packageCostUnit: '$'
+    weightLimit:    
+        'value': 25
+        'unit': 'Kgs'
+    ERROR_RESPONSES:
+        typeError: 'Unexpected Input Detected'
+        packageNotFound: 'Dimension(s) Exceeded limit'
+
+PROD:
+    packages:
+        -   'type': Medium
+            'length': 300
+            'breadth': 400
+            'height': 200
+            'cost': 7.50
+        -   'type': 'Large'
+            'length': 400
+            'breadth': 600
+            'height': 250
+            'cost': 8.50
+        -   'type': 'Small'
+            'length': 200
+            'breadth': 300
+            'height': 150   
+            'cost': 5.00
+    packageDimensionUnit: 'mm'
+    packageCostUnit: '$'
+    weightLimit:    
+        'value': 25
+        'unit': 'Kgs'
+    ERROR_RESPONSES:
+        typeError: 'Unexpected Input Detected'
+        packageNotFound: 'Dimension(s) Exceeded limit'
