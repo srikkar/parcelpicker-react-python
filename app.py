@@ -10,7 +10,7 @@ app = Flask(__name__)
 JSONSchemaValidator( app = app, root = "schemas" )
 
 try:
-    from parcelParser import ParcelParser
+    from utils import parcelParser
     
 except Exception as error:
     print(error)
@@ -18,7 +18,7 @@ except Exception as error:
 @app.route('/parseTheParcel/checkAlive', methods=['GET'])
 def checkAlive():
     try:
-        packageSolutionObj = ParcelParser()
+        packageSolutionObj = parcelParser.ParcelParser()
         return make_response(jsonify(status='live'), 200)
     except Exception as error:
         print(error)
@@ -28,7 +28,7 @@ def checkAlive():
 @app.route('/parseTheParcel/weightLimit', methods=['GET'])
 def weightLimit():
     try:
-        packageSolutionObj = ParcelParser()
+        packageSolutionObj = parcelParser.ParcelParser()
         return app.response_class(response=json.dumps({'weightLimit': packageSolutionObj.thresholdWeight.get('value'), 'unit': packageSolutionObj.thresholdWeight.get('unit')}),
                             status=200,
                             mimetype='application/json')
@@ -40,7 +40,7 @@ def weightLimit():
 @app.validate( 'packageSolution', 'weight' )
 def checkWeight():
     try:
-        packageSolutionObj = ParcelParser()
+        packageSolutionObj = parcelParser.ParcelParser()
         if packageSolutionObj.checkWeight(request.json['weight']):
             return make_response(jsonify(message='Allowed'), 200)
         else:
@@ -54,7 +54,7 @@ def checkWeight():
 @app.validate( 'packageSolution', 'dimensions' )
 def packageSolution():
     try:
-        packageSolutionObj = ParcelParser()
+        packageSolutionObj = parcelParser.ParcelParser()
         inputJson = request.json
         userInput = dict.fromkeys(['length','breadth', 'height'])
         for key in userInput:

@@ -1,15 +1,14 @@
 import os
 import yaml
 
-CONFIGURATION_FILE = "conf.yaml"
+CONFIGURATION_FILE = "configuration.yaml"
 
 class ParcelParser:
     """ Parcel Analyzer Utility """    
-    def __init__(self):
+    def __init__(self, configurationFilePath=os.path.join(os.path.dirname(os.path.realpath(__file__)),"../","conf", CONFIGURATION_FILE)):
         """ Loads Configuration file when Object is initialized
         """
         try:
-            configurationFilePath = os.path.join(os.path.dirname(os.path.realpath(__file__)),CONFIGURATION_FILE)
             with open(configurationFilePath, 'r') as configFile:
                 self.configuration = yaml.safe_load(configFile)
                 self.thresholdWeight = self.configuration.get('weightLimit')
@@ -62,7 +61,7 @@ class ParcelParser:
                         dimensionCounter+=1
                         if dimensionCounter == len(dimensionsList):
                             outputObject['packageType']= package.get('type')
-                            outputObject['cost']= package.get('cost')
+                            outputObject['cost']= """{}{}""".format(self.packageCostUnit, package.get('cost'))
                             return outputObject
             
             outputObject['exception'] = self.errors['packageNotFound']
