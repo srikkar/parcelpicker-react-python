@@ -1,0 +1,19 @@
+{
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "length": { "type": "number", "multipleOf": 1.0, "minimum": 0 },
+        "breadth": { "type": "number", "multipleOf": 1.0, "minimum": 0 },
+        "height": { "type": "number", "multipleOf": 1.0, "minimum": 0 },
+        "weight": { "type": "number", "multipleOf": 1.0, "minimum": 0 }
+      },
+      "required": [ "length", "breadth", "height", "weight" ]
+    },
+    "weight": {
+      "type": "object",
+      "properties": {
+        "weight": { "type": "number", "multipleOf": 1.0, "minimum": 0 }
+      },
+      "required": [ "weight" ]
+    }
+}
