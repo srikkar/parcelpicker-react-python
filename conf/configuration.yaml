@@ -1,3 +1,6 @@
+# Configurations can be specific to Environment
+# See, Example: in STG Environment, weight limit is provided as 10 Kgs and exception comments are  prepended with 'STG- '
+# If The Environment variable - "ENV" is not exported on Server, Service default to 'DEV' configurations
 DEV:
     packages:
         -   'type': 'Small'
@@ -45,11 +48,12 @@ STG:
     packageDimensionUnit: 'mm'
     packageCostUnit: '$'
     weightLimit:    
-        'value': 25
+        'value': 10
         'unit': 'Kgs'
     ERROR_RESPONSES:
-        typeError: 'Unexpected Input Detected'
-        packageNotFound: 'Dimension(s) are not in expected range'
+        typeError: 'STG- Unexpected Input Detected'
+        packageNotFound: 'STG- Dimension(s) are not in expected range'
+        weightException: 'STG- Weight exceeded Limit {} {}'
 
 PROD:
     packages:
@@ -76,3 +80,4 @@ PROD:
     ERROR_RESPONSES:
         typeError: 'Unexpected Input Detected'
         packageNotFound: 'Dimension(s) are not in expected range'
+        weightException: 'Weight exceeded Limit {} {}'

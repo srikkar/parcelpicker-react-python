@@ -92,6 +92,12 @@ class packageSolutionTests(unittest.TestCase):
         subject = parcelParser.ParcelParser(logger=logger)
         userInput = {'length': 300, 'breadth': 0, 'height': 350, 'weight': 30}
         self.assertIsInstance(subject.getpackageSolution(userInput),dict)
+    
+    def test_getpackageSolution_Inputs_Strings(self):
+        
+        subject = parcelParser.ParcelParser(logger=logger)
+        userInput = {'length': '300', 'breadth': 'hello', 'height': 'hi', 'weight': '0'}
+        self.assertIsInstance(subject.getpackageSolution(userInput),dict)
 
 
             

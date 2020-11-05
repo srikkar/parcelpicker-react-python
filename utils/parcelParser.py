@@ -94,15 +94,21 @@ class ParcelParser:
     def getpackageSolution(self, userInput):
         
         outputDict =dict.fromkeys(OUTPUT)
-        fetchedDimensions = dict.fromkeys(DIMENSIONS)
-        for key in fetchedDimensions:
-            fetchedDimensions[key] = userInput[key]
-        weightCheck = self.checkWeight(userInput.get('weight'))
-        
-        if weightCheck:
-            self.logger.debug("userInput: {}".format(fetchedDimensions))
-            outputDict.update(self.checkDimensions(fetchedDimensions))
-        else:
-            outputDict['weight'] = "Not Allowed"
-            outputDict['exception']=self.errors.get('weightException').format(self.thresholdWeight.get('value'), self.thresholdWeight.get('unit'))
-        return outputDict
+        try:
+            outputDict =dict.fromkeys(OUTPUT)
+            fetchedDimensions = dict.fromkeys(DIMENSIONS)
+            for key in fetchedDimensions:
+                fetchedDimensions[key] = userInput[key]
+            weightCheck = self.checkWeight(userInput.get('weight'))
+            
+            if weightCheck:
+                self.logger.debug("userInput: {}".format(fetchedDimensions))
+                outputDict.update(self.checkDimensions(fetchedDimensions))
+            else:
+                outputDict['weight'] = "Not Allowed"
+                outputDict['exception']=self.errors.get('weightException').format(self.thresholdWeight.get('value'), self.thresholdWeight.get('unit'))
+            return outputDict
+        except Exception as error:
+            self.logger.error(error)
+            outputDict['exception']=self.errors['typeError']
+            return outputDict

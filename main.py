@@ -29,13 +29,13 @@ def startApp():
         userInput = {}
         userInput['weight'] = validateNumber(input ('Enter Package Weight (In '+packageSolutionObj.thresholdWeight.get('unit', 'Kgs')+'): '))
         
-        logger.info('Please enter Package Dimensions in (In '+packageSolutionObj.configuration.get('packageDimensionsUnit','mm')+')')
+        logger.info('Please enter Package Dimensions in (In {})'.format(packageSolutionObj.configuration.get('packageDimensionsUnit','mm')))
         userInput[packageEnum.LENGTH.value] = validateNumber(input ('Enter Package length: '))
         userInput[packageEnum.BREADTH.value] = validateNumber(input ('Enter Package breadth: '))
         userInput[packageEnum.HEIGHT.value] = validateNumber(input ('Enter Package height: '))
         packageSolution = packageSolutionObj.getpackageSolution(userInput)
-        logger.info('Package Type: '+str(packageSolution.get('packageType')))
-        logger.info('Package Cost: '+str(packageSolution.get('cost')))
+        logger.info('Package Type: {}'.format(packageSolution.get('packageType')))
+        logger.info('Package Cost: {}'.format(packageSolution.get('cost')))
         exceptionMsg = packageSolution.get('exception')
         logger.info('Thank You!') if not exceptionMsg else logger.info('EXCEPTION: {}'.format(packageSolution.get('exception')))
     except ValueError as e:

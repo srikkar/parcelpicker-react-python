@@ -69,6 +69,11 @@ configurrable Properties are:
 - Error Responses
 _Also, all the Above are configurrable w.r.to Environments_
 
+##### Commandline to set the Environment [Optional, defaults to DEV]
+```sh
+export ENV=PROD
+```
+
 ### Tests ###
 Unit TestCases are defined in test directory .py file(s). 
 These tests would ensure if the Module is running in the expected mode.
@@ -79,10 +84,13 @@ pytest -v ./test/*.py
 
 ### Style Guide ###
 To Develop ParseTheParcel utility, have taken the Object oriented methodology.
-solution is placed in utils package, have basically 2 validators(methods) while parsing the Parcels
-1. Weight
-2. Dimensions
-returns corresponding responses based on the configurred allowed Values 
+solution is placed in utils package.
+Have de-coupled the validators
+1. Weight -  To check only weight, returns if it's allowed or not
+2. Dimensions - To check only Dimensions, returns suitable package
+3. Wrapper method - which takes combined Input to provide Suitable package   
+
+returns corresponding responses based on the Values available in configuration yaml file
 
 _Corresponding Configurations are fetched based on Environment Variable [ENV]_
 
@@ -102,7 +110,7 @@ Resource [http://127.0.0.1:8001/parseTheParcel/checkAlive](http://127.0.0.1:8001
 }
 ```
 
-#### Submit Package 
+#### Submit metric for Package Solution 
 Resource [http://127.0.0.1:8001/parseTheParcel/packageSolution](http://127.0.0.1:8001/parseTheParcel/packageSolution)  
 **Method:** [POST]
 ###### Request
@@ -114,6 +122,7 @@ Resource [http://127.0.0.1:8001/parseTheParcel/packageSolution](http://127.0.0.1
 	"weight": 22
 }
 ```
+
 ###### Response
 ```json
 {
