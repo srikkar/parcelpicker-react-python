@@ -21,7 +21,7 @@ try:
     from utils import parcelParser
 
 except Exception as error:
-    print(error)
+    logger.error(error)
 
 
 @app.route('/parseTheParcel/checkAlive', methods=['GET'])
@@ -29,7 +29,7 @@ def checkAlive():
     try:
         return make_response(jsonify(status='live'), 200)
     except Exception as error:
-        print(error)
+        logger.error(error)
         return make_response(jsonify(error=str(error)), 500)
 
 
@@ -43,7 +43,21 @@ def weightLimit():
                  'unit': packageSolutionObj.thresholdWeight.get('unit')}),
             status=200, mimetype='application/json')
     except Exception as error:
-        print(error)
+        logger.error(error)
+        return make_response(jsonify(error=str(error)), 500)
+
+
+@app.route('/parseTheParcel/packageTypes', methods=['GET'])
+def packageTypes():
+    try:
+        packageSolutionObj = parcelParser.ParcelParser(logger=logger)
+        return app.response_class(
+            response=json.dumps(
+                {'packages': packageSolutionObj.envConfig.get('packages', []),
+                 'unit': packageSolutionObj.envConfig.get('packageDimensionUnit')}),
+            status=200, mimetype='application/json')
+    except Exception as error:
+        logger.error(error)
         return make_response(jsonify(error=str(error)), 500)
 
 
@@ -57,7 +71,7 @@ def checkWeight():
         else:
             return make_response(jsonify(message='Not Allowed'), 200)
     except Exception as error:
-        print(error)
+        logger.error(error)
         return make_response(jsonify(error=str(error)), 500)
 
 
@@ -66,24 +80,13 @@ def checkWeight():
 def packageSolution():
     try:
         packageSolutionObj = parcelParser.ParcelParser(logger=logger)
-        inputJson = request.json
-        userInput = dict.fromkeys(['length', 'breadth', 'height'])
-        for key in userInput:
-            userInput[key] = inputJson[key]
-        if checkWeight().json['message'] == "Allowed":
-            print("userInput: "+str(userInput))
-            return app.response_class(response=json.dumps(packageSolutionObj.checkDimensions(userInput)),
+        outputDict = packageSolutionObj.getpackageSolution(request.json)
+        return app.response_class(response=json.dumps(outputDict),
                                       status=200,
                                       mimetype='application/json')
-        else:
-            return make_response(
-                jsonify(
-                    message='weight exceeded limit i.e., ' + str(packageSolutionObj.thresholdWeight.get('value')) + ' ' +
-                    packageSolutionObj.thresholdWeight.get('unit')),
-                200)
 
     except Exception as error:
-        print(error)
+        logger.error(error)
         return make_response(jsonify(error=str(error)), 500)
 
 
@@ -93,8 +96,11 @@ def onValidationError(error):
 
 
 if __name__ == '__main__':
-    print("Starting package Solution Service...")
+    logger.info("Starting package Solution Service...")
     if os.getenv('ENV', 'DEV') == "DEV":
         from flask_cors import CORS
         CORS(app)
         app.run(host="127.0.0.1", port="8001", debug=True)
+    else:
+        app.run(host="127.0.0.1", port="8001")
+

@@ -1,28 +1,40 @@
 # -*- coding: utf-8 -*-
 import os
 import yaml
+from enum import Enum
+
+class Packageprops(Enum):
+    LENGTH = 'length'
+    BREADTH = 'breadth'
+    HEIGHT = 'height'
+    WEIGHT = 'weight'
+    DIMENSIONS = [LENGTH, BREADTH, HEIGHT]
+    DIMENSION_UNIT = 'packageDimensionUnit'
+    WEIGHTLIMIT = 'weightLimit'
+    COSTUNIT = 'packageCostUnit'
+    PACKAGE = ['packageType', 'cost']
+    OUTPUT = ["packageType", "cost", "exception"]
+
 
 class ParcelParser:
     """ Parcel Analyzer Utility """
 
-    def __init__(self, logger, configurationFilePath=os.path.join(
-            os.path.dirname(os.path.realpath(__file__)),
-            "../", "conf", "configuration.yaml")):
+    def __init__(self, logger):
         """ Loads Configuration file when Object is initialized
         """
         try:
             ENV = os.getenv('ENV', 'DEV')
             self.logger = logger
-            with open(configurationFilePath, 'r') as configFile:
+            with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),"../", "conf", "configuration.yaml"), 'r') as configFile:
                 self.configuration = yaml.safe_load(configFile)
             self.envConfig = self.configuration[ENV]
             
-            self.thresholdWeight = self.envConfig.get('weightLimit')
-            self.packageCostUnit = self.envConfig.get('packageCostUnit')
-            self.packageDimensionUnit = self.envConfig.get('packageDimensionUnit')
+            self.thresholdWeight = self.envConfig.get(Packageprops.WEIGHTLIMIT.value)
+            self.packageCostUnit = self.envConfig.get(Packageprops.COSTUNIT.value)
+            self.packageDimensionUnit = self.envConfig.get(Packageprops.DIMENSION_UNIT.value)
             self.errors = self.envConfig.get('ERROR_RESPONSES')
         except FileNotFoundError:
-            self.logger.critical("{} is missing .....!".format(configurationFilePath ))
+            self.logger.critical("Configuration file is missing .....!")
         except Exception as error:
             self.logger.error(error)
 
@@ -59,7 +71,7 @@ class ParcelParser:
                 self.logger.warning('Non-Numeric input detected!')
                 raise TypeError('Non-Numeric Input package detected...!')
 
-            outputObject = dict.fromkeys(['packageType', 'cost'])
+            outputObject = dict.fromkeys(Packageprops.PACKAGE.value)
             for package in sorted(self.envConfig.get('packages', []), key=lambda i: i['length']):
                 dimensionCounter = 0
                 dimensionsList = list(packageDimensions.keys())
@@ -77,3 +89,19 @@ class ParcelParser:
             raise TypeError(self.errors['typeError'])
         except Exception as error:
             self.logger.error(error)
+
+    def getpackageSolution(self, userInput):
+        
+        outputDict =dict.fromkeys(Packageprops.OUTPUT.value)
+        fetchedDimensions = dict.fromkeys(Packageprops.DIMENSIONS.value)
+        for key in fetchedDimensions:
+            fetchedDimensions[key] = userInput[key]
+        weightCheck = self.checkWeight(userInput.get('weight'))
+        
+        if weightCheck:
+            self.logger.debug("userInput: {}".format(fetchedDimensions))
+            outputDict.update(self.checkDimensions(fetchedDimensions))
+        else:
+            outputDict['weight'] = "Not Allowed"
+            outputDict['exception']=self.errors.get('weightException').format(self.thresholdWeight.get('value'), self.thresholdWeight.get('unit'))
+        return outputDict
