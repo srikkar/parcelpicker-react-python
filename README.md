@@ -29,6 +29,8 @@ Best of luck, and we look forwards to your response!
 
 ### Installing / Getting started ###
 A quick introduction of the minimal setup you need to get the Package Solution up & running.
+Note: Python 3+ version is required  
+
 1. Clone the Project
 ```sh
 git clone <PROJECT_GIT_URL>
@@ -52,11 +54,17 @@ pip install -r requirements.txt
  python main.py
 ```
 
-5. _Optional_ Import postman misc/ParcelParser.postman_collection.json file to hit the APIs pre-configurred (_listed below in API reference section_)
+5. _Optional_ 
+**Import** postman [misc/ParcelParser.postman_collection.json] file to hit the APIs pre-configurred   
+(_listed below in API reference section_)   
+Commandline to set the Environment, defaults to DEV (if not provided)
+```sh
+export ENV=PROD
+```
 
 ### Developing ###
 
-**Built with** Python using 3.6+ version
+**Built with** Python using 3.7.9 version
 Packages required are listed in requirements.txt 
 
 ### Configuration ###
@@ -69,10 +77,7 @@ configurrable Properties are:
 - Error Responses
 _Also, all the Above are configurrable w.r.to Environments_
 
-##### Commandline to set the Environment [Optional, defaults to DEV]
-```sh
-export ENV=PROD
-```
+
 
 ### Tests ###
 Unit TestCases are defined in test directory .py file(s). 
