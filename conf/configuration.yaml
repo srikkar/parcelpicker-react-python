@@ -22,7 +22,7 @@ DEV:
         'unit': 'Kgs'
     ERROR_RESPONSES:
         typeError: 'Unexpected Input Detected'
-        packageNotFound: 'Dimension(s) Exceeded limit'
+        packageNotFound: 'Dimension(s) are not in expected range'
 
 STG:
     packages:
@@ -48,7 +48,7 @@ STG:
         'unit': 'Kgs'
     ERROR_RESPONSES:
         typeError: 'Unexpected Input Detected'
-        packageNotFound: 'Dimension(s) Exceeded limit'
+        packageNotFound: 'Dimension(s) are not in expected range'
 
 PROD:
     packages:
@@ -74,4 +74,4 @@ PROD:
         'unit': 'Kgs'
     ERROR_RESPONSES:
         typeError: 'Unexpected Input Detected'
-        packageNotFound: 'Dimension(s) Exceeded limit'
+        packageNotFound: 'Dimension(s) are not in expected range'
