@@ -26,7 +26,125 @@ We will send you an invite to this git repository. Please **fork** this reposito
 
 Best of luck, and we look forwards to your response!
 
-# Solution #
-Built in Python
 
-Parcels are configurred in yaml file for reliability
+### Installing / Getting started ###
+A quick introduction of the minimal setup you need to get the Package Solution up & running.
+1. Clone the Project
+```sh
+git clone <PROJECT_GIT_URL>
+```
+2. Create and Activate virtual environment 
+```sh
+python -m venv virtual_env
+source ~/virtual_env/bin/activate
+pip install -r requirements.txt
+```
+
+3. To run the module in Commandline
+```sh
+ cd <Project-directory>/
+ python main.py
+```
+
+4. To host the Solution as webservice
+```sh
+ cd <Project-directory>/
+ python app.py
+```
+
+5. _Optional_ Import postman misc/ParcelParser.postman_collection.json file to hit the APIs pre-configurred(_listed below in API reference section_)
+
+### Developing ###
+
+**Built with** Python using 3.6+ version
+Packages required are listed in requirements.txt 
+
+### Configuration ###
+configuration files are placed under conf directory
+configurrable Properties are:
+- package types
+- dimensions & Unit
+- Currency & Unit
+- Weight Limit & Unit
+- Error Responses
+_Also, all the Above are configurrable w.r.to Environments_
+
+### Tests ###
+Unit TestCases are defined in test directory .py file(s). 
+These tests would ensure if the Module is running in the expected mode.
+In case of any code changes, please ensure to run the test cases to see [100% pass] result in the Console
+```sh
+pytest -v ./test/*.py
+```
+
+### Style Guide ###
+To Develop ParseTheParcel utility, have taken the Object oriented methodology.
+solution is placed in utils package, have basically 2 validators(methods) while parsing the Parcels
+1. Weight
+2. Dimensions
+returns corresponding responses based on the configurred allowed Values 
+
+_Corresponding Configurations are fetched based on Environment Variable [ENV]_
+
+RESTFul webservice is developed using Python-Flask
+
+### API reference ###
+
+Once the Service is UP, below resources are available from the Service
+
+#### Check if Service is live
+Resource [http://127.0.0.1:8001/parseTheParcel/checkAlive](http://127.0.0.1:8001/parseTheParcel/checkAlive)
+**Method:** [GET]
+###### Response
+```json
+{
+    "status": "live"
+}
+```
+
+#### Submit Package 
+Resource [http://127.0.0.1:8001/parseTheParcel/packageSolution](http://127.0.0.1:8001/parseTheParcel/packageSolution)
+**Method:** [POST]
+###### Request
+```json
+{
+	"length": 1,
+    "height" : 20,
+	"breadth": 310,
+	"weight": 0.01
+}
+```
+###### Response
+```json
+{
+    "packageType": "Medium",
+    "cost": "$7.5"
+}
+```
+
+#### Checks Weight of the Package against Limit
+Resource [http://127.0.0.1:8001/parseTheParcel/checkWeight](http://127.0.0.1:8001/parseTheParcel/checkWeight)
+**Method:** [POST]
+###### Request
+```json
+{
+    "weight": 25
+}
+```
+###### Response
+```json
+{
+    "message": "Allowed"
+}
+```
+
+#### Get Weight Limit
+Resource [http://127.0.0.1:8001/parseTheParcel/weightLimit](http://127.0.0.1:8001/parseTheParcel/weightLimit)
+**Method:** [GET]
+###### Response
+```json
+{
+    "weightLimit": 25,
+    "unit": "Kgs"
+}
+```
