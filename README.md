@@ -54,7 +54,7 @@ pip install -r requirements.txt
  python main.py
 ```
 
-5. _Optional_ 
+5. _Optional_   
 **Import** postman [misc/ParcelParser.postman_collection.json] file to hit the APIs pre-configurred   
 (_listed below in API reference section_)   
 Commandline to set the Environment, defaults to DEV (if not provided)
@@ -64,7 +64,7 @@ export ENV=PROD
 
 ### Developing ###
 
-**Built with** Python using 3.7.9 version
+**Built with** Python 3.7.9 version.   
 Packages required are listed in requirements.txt 
 
 ### Configuration ###
