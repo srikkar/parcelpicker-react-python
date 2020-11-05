@@ -40,17 +40,17 @@ source ~/virtual_env/bin/activate
 pip install -r requirements.txt
 ```
 
-3. To run the module in Commandline
-```sh
- cd <Project-directory>/
- python main.py
-```
-
-4. To host the Solution as webservice
+3. To host the Solution as webservice
 ```sh
  cd <Project-directory>/
  python app.py
 ```   
+
+4. To run the module in Commandline
+```sh
+ cd <Project-directory>/
+ python main.py
+```
 
 5. _Optional_ Import postman misc/ParcelParser.postman_collection.json file to hit the APIs pre-configurred (_listed below in API reference section_)
 

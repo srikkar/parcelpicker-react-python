@@ -3,17 +3,18 @@ import os
 import yaml
 from enum import Enum
 
-class Packageprops(Enum):
+class PackageProps(Enum):
     LENGTH = 'length'
     BREADTH = 'breadth'
     HEIGHT = 'height'
     WEIGHT = 'weight'
-    DIMENSIONS = [LENGTH, BREADTH, HEIGHT]
-    DIMENSION_UNIT = 'packageDimensionUnit'
-    WEIGHTLIMIT = 'weightLimit'
-    COSTUNIT = 'packageCostUnit'
-    PACKAGE = ['packageType', 'cost']
-    OUTPUT = ["packageType", "cost", "exception"]
+
+DIMENSIONS = [PackageProps.LENGTH.value, PackageProps.BREADTH.value, PackageProps.HEIGHT.value]
+DIMENSION_UNIT = 'packageDimensionUnit'
+WEIGHTLIMIT = 'weightLimit'
+COSTUNIT = 'packageCostUnit'
+PACKAGE = ['packageType', 'cost']
+OUTPUT = ["packageType", "cost", "exception"]
 
 
 class ParcelParser:
@@ -29,9 +30,9 @@ class ParcelParser:
                 self.configuration = yaml.safe_load(configFile)
             self.envConfig = self.configuration[ENV]
             
-            self.thresholdWeight = self.envConfig.get(Packageprops.WEIGHTLIMIT.value)
-            self.packageCostUnit = self.envConfig.get(Packageprops.COSTUNIT.value)
-            self.packageDimensionUnit = self.envConfig.get(Packageprops.DIMENSION_UNIT.value)
+            self.thresholdWeight = self.envConfig.get(WEIGHTLIMIT)
+            self.packageCostUnit = self.envConfig.get(COSTUNIT)
+            self.packageDimensionUnit = self.envConfig.get(DIMENSION_UNIT)
             self.errors = self.envConfig.get('ERROR_RESPONSES')
         except FileNotFoundError:
             self.logger.critical("Configuration file is missing .....!")
@@ -71,7 +72,7 @@ class ParcelParser:
                 self.logger.warning('Non-Numeric input detected!')
                 raise TypeError('Non-Numeric Input package detected...!')
 
-            outputObject = dict.fromkeys(Packageprops.PACKAGE.value)
+            outputObject = dict.fromkeys(PACKAGE)
             for package in sorted(self.envConfig.get('packages', []), key=lambda i: i['length']):
                 dimensionCounter = 0
                 dimensionsList = list(packageDimensions.keys())
@@ -92,8 +93,8 @@ class ParcelParser:
 
     def getpackageSolution(self, userInput):
         
-        outputDict =dict.fromkeys(Packageprops.OUTPUT.value)
-        fetchedDimensions = dict.fromkeys(Packageprops.DIMENSIONS.value)
+        outputDict =dict.fromkeys(OUTPUT)
+        fetchedDimensions = dict.fromkeys(DIMENSIONS)
         for key in fetchedDimensions:
             fetchedDimensions[key] = userInput[key]
         weightCheck = self.checkWeight(userInput.get('weight'))

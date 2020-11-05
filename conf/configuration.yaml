@@ -1,5 +1,10 @@
 DEV:
     packages:
+        -   'type': 'Small'
+            'length': 200
+            'breadth': 300
+            'height': 150   
+            'cost': 5.00
         -   'type': Medium
             'length': 300
             'breadth': 400
@@ -10,11 +15,6 @@ DEV:
             'breadth': 600
             'height': 250
             'cost': 8.50
-        -   'type': 'Small'
-            'length': 200
-            'breadth': 300
-            'height': 150   
-            'cost': 5.00
     packageDimensionUnit: 'mm'
     packageCostUnit: '$'
     weightLimit:    
