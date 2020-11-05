@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "9c20fe36-33b7-4cf6-8d8b-a7e6c047faa0",
+		"name": "ParcelParser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "checkServiceStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8001/parseTheParcel/checkAlive",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"parseTheParcel",
+						"checkAlive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Package Solution",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"length\": 10,\n    \"height\" : 20,\n\t\"breadth\": 310,\n\t\"weight\": 25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8001/parseTheParcel/packageSolution",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"parseTheParcel",
+						"packageSolution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkWeight",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"1weight\": 23}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8001/parseTheParcel/checkWeight",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"parseTheParcel",
+						"checkWeight"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getWeightLimit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8001/parseTheParcel/weightLimit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"parseTheParcel",
+						"weightLimit"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
