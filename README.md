@@ -50,9 +50,9 @@ pip install -r requirements.txt
 ```sh
  cd <Project-directory>/
  python app.py
-```
+```   
 
-5. _Optional_ Import postman misc/ParcelParser.postman_collection.json file to hit the APIs pre-configurred(_listed below in API reference section_)
+5. _Optional_ Import postman misc/ParcelParser.postman_collection.json file to hit the APIs pre-configurred (_listed below in API reference section_)
 
 ### Developing ###
 
@@ -93,7 +93,7 @@ RESTFul webservice is developed using Python-Flask
 Once the Service is UP, below resources are available from the Service
 
 #### Check if Service is live
-Resource [http://127.0.0.1:8001/parseTheParcel/checkAlive](http://127.0.0.1:8001/parseTheParcel/checkAlive)
+Resource [http://127.0.0.1:8001/parseTheParcel/checkAlive](http://127.0.0.1:8001/parseTheParcel/checkAlive)  
 **Method:** [GET]
 ###### Response
 ```json
@@ -103,32 +103,33 @@ Resource [http://127.0.0.1:8001/parseTheParcel/checkAlive](http://127.0.0.1:8001
 ```
 
 #### Submit Package 
-Resource [http://127.0.0.1:8001/parseTheParcel/packageSolution](http://127.0.0.1:8001/parseTheParcel/packageSolution)
+Resource [http://127.0.0.1:8001/parseTheParcel/packageSolution](http://127.0.0.1:8001/parseTheParcel/packageSolution)  
 **Method:** [POST]
 ###### Request
 ```json
 {
-	"length": 1,
+	"length": 100,
     "height" : 20,
-	"breadth": 310,
-	"weight": 0.01
+	"breadth": 210,
+	"weight": 22
 }
 ```
 ###### Response
 ```json
 {
-    "packageType": "Medium",
-    "cost": "$7.5"
+    "packageType": "Small",
+    "cost": "$5.0",
+    "exception": null
 }
 ```
 
 #### Checks Weight of the Package against Limit
-Resource [http://127.0.0.1:8001/parseTheParcel/checkWeight](http://127.0.0.1:8001/parseTheParcel/checkWeight)
+Resource [http://127.0.0.1:8001/parseTheParcel/checkWeight](http://127.0.0.1:8001/parseTheParcel/checkWeight)  
 **Method:** [POST]
 ###### Request
 ```json
 {
-    "weight": 25
+    "weight": 23
 }
 ```
 ###### Response
@@ -139,7 +140,7 @@ Resource [http://127.0.0.1:8001/parseTheParcel/checkWeight](http://127.0.0.1:800
 ```
 
 #### Get Weight Limit
-Resource [http://127.0.0.1:8001/parseTheParcel/weightLimit](http://127.0.0.1:8001/parseTheParcel/weightLimit)
+Resource [http://127.0.0.1:8001/parseTheParcel/weightLimit](http://127.0.0.1:8001/parseTheParcel/weightLimit)  
 **Method:** [GET]
 ###### Response
 ```json
@@ -148,3 +149,37 @@ Resource [http://127.0.0.1:8001/parseTheParcel/weightLimit](http://127.0.0.1:800
     "unit": "Kgs"
 }
 ```
+
+#### Get package types Available
+Resource [http://127.0.0.1:8001/parseTheParcel/packageTypes](http://127.0.0.1:8001/parseTheParcel/packageTypes)  
+**Method:** [GET]
+###### Response
+```json
+{
+    "packages": [
+        {
+            "type": "Medium",
+            "length": 300,
+            "breadth": 400,
+            "height": 200,
+            "cost": 7.5
+        },
+        {
+            "type": "Large",
+            "length": 400,
+            "breadth": 600,
+            "height": 250,
+            "cost": 8.5
+        },
+        {
+            "type": "Small",
+            "length": 200,
+            "breadth": 300,
+            "height": 150,
+            "cost": 5.0
+        }
+    ],
+    "unit": "mm"
+}
+```
+

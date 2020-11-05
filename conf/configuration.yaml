@@ -23,6 +23,7 @@ DEV:
     ERROR_RESPONSES:
         typeError: 'Unexpected Input Detected'
         packageNotFound: 'Dimension(s) are not in expected range'
+        weightException: 'Weight exceeded Limit {} {}'
 
 STG:
     packages:

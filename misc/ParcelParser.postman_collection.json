@@ -35,7 +35,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"length\": 10,\n    \"height\" : 20,\n\t\"breadth\": 310,\n\t\"weight\": 25\n}",
+					"raw": "{\n\t\"length\": 100,\n    \"height\" : 20,\n\t\"breadth\": 210,\n\t\"weight\": 21\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -67,7 +67,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"1weight\": 23}",
+					"raw": "{\"weight\": 29}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -110,6 +110,29 @@
 					"path": [
 						"parseTheParcel",
 						"weightLimit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "packageTypes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8001/parseTheParcel/packageTypes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"parseTheParcel",
+						"packageTypes"
 					]
 				}
 			},

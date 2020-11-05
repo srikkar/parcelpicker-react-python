@@ -81,6 +81,18 @@ class packageSolutionTests(unittest.TestCase):
         userInput = {'length': 300, 'breadth': 0, 'height': 350}
         self.assertEqual(subject.checkDimensions(userInput)['exception'],subject.errors['packageNotFound'])
 
+    def test_getpackageSolution_Inputs_weightInLimit(self):
+        
+        subject = parcelParser.ParcelParser(logger=logger)
+        userInput = {'length': 300, 'breadth': 0, 'height': 350, 'weight': 20}
+        self.assertIsInstance(subject.getpackageSolution(userInput),dict)
+    
+    def test_getpackageSolution_Inputs_weightExceededLimit(self):
+        
+        subject = parcelParser.ParcelParser(logger=logger)
+        userInput = {'length': 300, 'breadth': 0, 'height': 350, 'weight': 30}
+        self.assertIsInstance(subject.getpackageSolution(userInput),dict)
+
 
             
         
