@@ -60,12 +60,19 @@ pip install -r requirements.txt
 Commandline to set the Environment, defaults to DEV (if not provided)
 ```sh
 export ENV=PROD
-```
+```  
+6. User Interface using **REACTJS**
+
+Application UI is available at [http://localhost:8001/package-solution](http://localhost:8001/package-solution)
+
+![UI Page](./misc/package-solution-UI.png?raw=true "React Page")
 
 ### Developing ###
 
 **Built with** Python 3.7.9 version.   
-Packages required are listed in requirements.txt 
+Packages required are listed in requirements.txt   
+
+Soution is hosted on **Python Flask**, View components are built with **REACTJS** framework
 
 ### Configuration ###
 configuration files are placed under conf directory
