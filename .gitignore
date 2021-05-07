@@ -22,3 +22,6 @@ virtual_env
 __pycache__
 test/__pycache__
 .pytest_cache
+.DS_Store
+/.idea/modules.xml
+/.idea/ParseTheParcel-Srikar-Vangala.iml
